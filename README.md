@@ -12,7 +12,7 @@ Building and deploying a Next.js site on Azure Static Web Apps with Azure Pipeli
 - Includes internal build tool [Oryx](https://github.com/microsoft/Oryx)
 - Can deploy to multiple environments inside a single web app
 
-The killer feature of static web apps is [Hybrid Next.js applications](https://learn.microsoft.com/en-us/azure/static-web-apps/deploy-Next.js-hybrid) which allows you to use Next.js SSR and API endpoints.
+The killer feature of static web apps is [Hybrid Next.js applications](https://learn.microsoft.com/en-us/azure/static-web-apps/deploy-nextjs-hybrid) which allows you to use Next.js SSR and API endpoints.
 
 ## About Next.js SSR vs SSG
 
