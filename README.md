@@ -28,7 +28,7 @@ In order to use NextJS API endpoints, an Azure Static Web App needs to be deploy
 
 ## Deploying a NextJS app with Azure Pipelines
 
-I believe (?) that in order to deploy as a Hybrid website, the builtin Azure build tool Oryx has to be used to build the NextJS site. This is because [the docs])(https://learn.microsoft.com/en-us/azure/static-web-apps/deploy-nextjs-hybrid#unsupported-features-in-preview) say `skip_app_build` and `skip_api_build` features are not supported in preview. (I may be wrong on this, though!)
+I believe (?) that in order to deploy as a Hybrid website, the builtin Azure build tool Oryx has to be used to build the NextJS site. This is because [the docs](https://learn.microsoft.com/en-us/azure/static-web-apps/deploy-nextjs-hybrid#unsupported-features-in-preview) say `skip_app_build` and `skip_api_build` features are not supported in preview. (I may be wrong on this, though!)
 
 To set up deployment to an Azure Static Web App with Azure Pipelines, you need to:
 
@@ -48,10 +48,8 @@ To set up deployment to an Azure Static Web App with Azure Pipelines, you need t
 When we tried to deploy our NextJS app to Azure Static Web Apps, we got the following error:
 
 ```
-
 The content server has rejected the request with: BadRequest
 Reason: The size of the function content was too large. The limit for this Static Web App is 104857600 bytes.
-
 ```
 
 This is because of the NextJS build cache folder. This folder isn't used at runtime, and this GitHub issue explains how to fix the error - by adding a custom build command to remove the cache folder before deployment:
