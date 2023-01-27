@@ -1,4 +1,5 @@
 # Azure Static Web Apps + NextJS + Azure Pipelines
+
 Building and deploying a Nextjs site on Azure Static Web Apps with Azure Pipelines
 
 ## About Azure Static Web Apps
@@ -12,3 +13,15 @@ Building and deploying a Nextjs site on Azure Static Web Apps with Azure Pipelin
 - Can deploy to multiple environments inside a single web app
 
 The killer feature of static web apps is [Hybrid websites](https://learn.microsoft.com/en-us/azure/static-web-apps/deploy-nextjs-hybrid) which allows you to use NextJS SSR and API endpoints.
+
+## SSR vs SSG
+
+- SSR - Server Side Rendering
+  - NextJS will render the page on the server and send the HTML to the browser
+  - This is the default mode for NextJS
+  - The page will be rendered on every request
+- SSG - Static Site Generation
+  - NextJS will render the page on the server and save the HTML to a file
+  - The page will be rendered once and then served from the file system
+
+Currently an Azure Static Web App Hybrid website only allows the use of the API endpoint if running in SSR mode.
