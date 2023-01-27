@@ -39,8 +39,8 @@ To set up deployment to an Azure Static Web App with Azure Pipelines, you need t
    ```yaml
    - task: AzureStaticWebApp@0
      inputs:
-     azure_static_web_apps_api_token: $(static-web-apps-deploy-token)
-     app_location: '/' # set this to the folder of your Next.js app
+       azure_static_web_apps_api_token: $(static-web-apps-deploy-token)
+       app_location: '/' # set this to the folder of your Next.js app
    ```
 
 ### Size Error
