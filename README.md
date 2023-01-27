@@ -28,7 +28,13 @@ In order to use Next.js API endpoints, an Azure Static Web App needs to be deplo
 
 ## Deploying a Next.js app with Azure Pipelines
 
-I believe (?) that in order to deploy as a Hybrid website, the built in Azure build tool Oryx has to be used to build the Next.js site. This is because [the docs](https://learn.microsoft.com/en-us/azure/static-web-apps/deploy-nextjs-hybrid#unsupported-features-in-preview) say `skip_app_build` and `skip_api_build` features are not supported in preview. (I may be wrong on this, though!)
+In order to deploy as a Hybrid Next.js application, the site build has to happen inside the AzureStaticWebApp task (which uses Oryx). This is because [`skip_app_build` and `skip_api_build` features are not supported in preview](https://learn.microsoft.com/en-us/azure/static-web-apps/deploy-nextjs-hybrid#unsupported-features-in-preview) - and if you try to set `skip_app_build` then the task expects static site files, and you'll see the following error:
+
+```
+Failed to find a default file in the app artifacts folder (.next). Valid default files: index.html,Index.html.
+If your application contains purely static content, please verify that the variable 'app_location' in your deployment configuration file points to the root of your application.
+If your application requires build steps, please validate that a default file exists in the build output directory.
+```
 
 To set up deployment to an Azure Static Web App with Azure Pipelines, you need to:
 
