@@ -14,7 +14,7 @@ Building and deploying a Nextjs site on Azure Static Web Apps with Azure Pipelin
 
 The killer feature of static web apps is [Hybrid websites](https://learn.microsoft.com/en-us/azure/static-web-apps/deploy-nextjs-hybrid) which allows you to use NextJS SSR and API endpoints.
 
-## SSR vs SSG
+## About NextJS SSR vs SSG
 
 - SSR - Server Side Rendering
   - NextJS will render the page on the server and send the HTML to the browser
@@ -24,7 +24,7 @@ The killer feature of static web apps is [Hybrid websites](https://learn.microso
   - NextJS will render the page on the server and save the HTML to a file
   - The page will be rendered once and then served from the file system
 
-Currently an Azure Static Web App Hybrid website only allows the use of the API endpoint if running in SSR mode.
+In order to use NextJS API endpoints, an Azure Static Web App needs to be deployed as a **Hybrid website** - and these run in SSR mode.
 
 ## Deploying a NextJS app with Azure Pipelines
 
@@ -34,22 +34,24 @@ To set up deployment to an Azure Static Web App with Azure Pipelines, you need t
 
 1. Create an Azure Static Web App in the Azure portal and click `Manage deployment token` and copy the token.
 1. In your Azure Pipeline, create a new variable called `static-web-apps-deploy-token`, paste the token into the value and set it to be secret.
-1. Add an `AzureStaticWebApp@0` task to deploy:
+1. Add an `AzureStaticWebApp@0` task to the pipeline yaml:
 
-```yaml
-- task: AzureStaticWebApp@0
-  inputs:
-    azure_static_web_apps_api_token: $(static-web-apps-deploy-token)
-    app_location: '/' # set this to the folder of your NextJS app
-```
+   ```yaml
+   - task: AzureStaticWebApp@0
+     inputs:
+     azure_static_web_apps_api_token: $(static-web-apps-deploy-token)
+     app_location: '/' # set this to the folder of your NextJS app
+   ```
 
 ### Size Error
 
 When we tried to deploy our NextJS app to Azure Static Web Apps, we got the following error:
 
 ```
+
 The content server has rejected the request with: BadRequest
 Reason: The size of the function content was too large. The limit for this Static Web App is 104857600 bytes.
+
 ```
 
 This is because of the NextJS build cache folder. This folder isn't used at runtime, and this GitHub issue explains how to fix the error - by adding a custom build command to remove the cache folder before deployment:
